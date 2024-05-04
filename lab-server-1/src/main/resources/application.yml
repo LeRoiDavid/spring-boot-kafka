@@ -4,10 +4,11 @@ spring:
 
 
   kafka:
-    bootstrap-servers: localhost:9092
+#    bootstrap-servers: localhost:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: localhost:9092
 #      group-id: my-group-id
 #    bootstrap-servers: localhost:9092
 #    consumer:

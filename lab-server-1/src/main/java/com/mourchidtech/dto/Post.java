@@ -1,4 +1,4 @@
-package com.mourchidtech.labserver1.dto.Post;
+package com.mourchidtech.dto;
 
 
 import lombok.*;
@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Post {
     private Long id;
 

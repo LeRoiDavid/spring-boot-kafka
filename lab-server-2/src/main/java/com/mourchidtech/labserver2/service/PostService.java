@@ -31,4 +31,17 @@ public class PostService {
             System.out.println(ex.getMessage());
         }
     }
+
+    public void update(com.mourchidtech.dto.Post post)  {
+        try {
+            Post postToUpdate =  repository.findById(post.getId()).orElseThrow(() -> new RuntimeException("Post with id not found"));
+            postToUpdate.setTitle(post.getTitle());
+            postToUpdate.setContent(post.getContent());
+            postToUpdate.setContent(post.getContent());
+            repository.save(postToUpdate);
+        } catch (Exception ex ) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
+

@@ -3,12 +3,9 @@ package com.mourchidtech.labserver1.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mourchidtech.labserver1.config.MessageProducer;
-import com.mourchidtech.labserver1.dto.Post.Post;
+import com.mourchidtech.dto.Post;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -19,14 +16,19 @@ public class PostController {
 
     @PostMapping
     public String createPost(@RequestBody Post post) throws JsonProcessingException {
+        messageProducer.sendMessage("createPost", post);
+        return "Post sent";
+    }
 
-        ObjectMapper objectMapper = new ObjectMapper();
+    @GetMapping
+    public String fetchAll(@RequestBody Post post) throws JsonProcessingException {
+        return "Fetch post";
+    }
 
-        String message = objectMapper.writeValueAsString(post);
-
-        System.out.println(message);
-        messageProducer.sendMessage("createPost", message);
-
+    @PatchMapping("/{id}")
+    public String updatePost(@PathVariable("id") Long id, @RequestBody Post post) {
+        post.setId(id);
+        messageProducer.sendMessage("updatePost", post);
         return "Post sent";
     }
 }
